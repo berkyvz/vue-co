@@ -1,29 +1,54 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div>
+    <nav class="navbar navbar-light bg-dark">
+      <span class="navbar-brand brandd">Catch Opportunity</span>
+      <ul>
+        <router-link to="/" class="links">About Us</router-link>
+        <router-link to="/login" class="links">Login</router-link>
+        <router-link to="/register" class="links">Register</router-link>
+      </ul>
+    </nav>
+
+    <div class="mainContent">
+      <router-view></router-view>
     </div>
-    <router-view/>
   </div>
+
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+export default {
+  name: 'app',
+  data () {
+    return {
+     
     }
   }
 }
+
+</script>
+
+<style scoped>
+.brandd{
+  color : white;
+}
+.brandd:hover {
+  color : gray;
+}
+.links{
+  color : white;
+  font-weight: 600;
+  margin-right: 20px;
+}
+.links:hover{
+  color: gray;
+}
+ul {
+   display: inline; 
+}
+.mainContent{
+  padding: 20px;
+  margin-top: 10px;
+}
+
 </style>
