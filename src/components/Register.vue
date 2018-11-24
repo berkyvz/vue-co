@@ -1,7 +1,43 @@
-
 <template>
     <div class="container">
-        <h1>Register VUE!</h1>
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="email" v-model="email" class="form-control" placeholder="Enter your email">                
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" v-model="password" class="form-control" placeholder="Enter your password">
+        </div>
+        <div class="form-group">
+            <label>Company name</label>
+            <input type="text" v-model="companyName" class="form-control" placeholder="Enter your company name">                
+        </div>
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" v-model="city" class="form-control" placeholder="Enter the city of your company ">                
+        </div>
+        <div class="form-group">
+            <label>Latitude</label>
+            <input type="text" v-model="latitude" class="form-control" placeholder="Enter the latitude of your company ">                
+        </div>
+        <div class="form-group">
+            <label>Longitude</label>
+            <input type="text" v-model="longitude" class="form-control" placeholder="Enter the longitude of your company ">                
+        </div>
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number">                
+        </div>
+        <div v-if="isRegistered == 1" class="alert alert-danger" role="alert">
+            Something you have written is incorrect.
+        </div>
+        <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
+            Welcome {{ name }}! You have successfully registered.
+        </div>
+        <button id="btnLeft" type="submit" class="btn btn-primary" v-on:click="submitRegister" >Register</button>
+        
+        <button id="btnRight" type="reset" class="btn btn-primary" v-on:click="submitClear" >Clear</button>
+        
     </div>
 
 </template>
@@ -11,12 +47,59 @@ export default {
     name : 'register',
     data(){
         return {
-          
+            email : "",
+            password : "",
+            companyName : "",
+            city : "",
+            latitude : "",
+            longitude : "",
+            phone : "",
+            isRegistered : 0,
+            name : ""
         }
+    },
+    methods : {
+        submitRegister : function (){
+            var registerObj = {
+                'email' : this.email ,
+                'password' : this.password,
+                'companyName' : this.companyName,
+                'city' : this.city,
+                'latitude' : this.latitude,
+                'longitude' : this.longitude,
+                'phone' : this.phone,             
+                
+            }
+            this.$http.get('http://localhost:8080/company/me', registerObj).then(
+                (response) => {
+                    this.isRegistered = 2;
+                    this.name = response.body.name;
+                },
+                (err) => {
+                    this.isRegistered = 1;
+                }
+            )
+            
+        },
+        submitClear : function (){
+            
+                this.email = "";
+                this.password = "";
+                this.companyName = "";
+                this.city = "";
+                this.latitude = "";
+                this.longitude = "";
+                this.phone = "";
+
+            }
+        } 
     }  
-}
+
 </script>
 
 <style scoped>
-  
+    #btnLeft {
+        margin-right: 10px;
+
+    }
 </style>
