@@ -2,31 +2,31 @@
     <div class="container">
         <div class="form-group">
             <label>Email address</label>
-            <input type="email" v-model="email" class="form-control" placeholder="Enter your email">                
+            <input type="email" v-model="email" class="form-control" placeholder="Enter your email" required>                
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input type="password" v-model="password" class="form-control" placeholder="Enter your password">
+            <input type="password" v-model="password" class="form-control" placeholder="Enter your password" required>
         </div>
         <div class="form-group">
             <label>Company name</label>
-            <input type="text" v-model="companyName" class="form-control" placeholder="Enter your company name">                
+            <input type="text" v-model="name" class="form-control" placeholder="Enter your company name" required>                
         </div>
         <div class="form-group">
             <label>City</label>
-            <input type="text" v-model="city" class="form-control" placeholder="Enter the city of your company ">                
+            <input type="text" v-model="city" class="form-control" placeholder="Enter the city of your company " required>                
         </div>
         <div class="form-group">
             <label>Latitude</label>
-            <input type="text" v-model="latitude" class="form-control" placeholder="Enter the latitude of your company ">                
+            <input type="text" v-model="latitude" class="form-control" placeholder="Enter the latitude of your company " required>                
         </div>
         <div class="form-group">
             <label>Longitude</label>
-            <input type="text" v-model="longitude" class="form-control" placeholder="Enter the longitude of your company ">                
+            <input type="text" v-model="longitude" class="form-control" placeholder="Enter the longitude of your company " required>                
         </div>
         <div class="form-group">
             <label>Phone</label>
-            <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number">                
+            <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number" required>                
         </div>
         <div v-if="isRegistered == 1" class="alert alert-danger" role="alert">
             Something you have written is incorrect.
@@ -49,33 +49,35 @@ export default {
         return {
             email : "",
             password : "",
-            companyName : "",
+            name : "",
             city : "",
             latitude : "",
             longitude : "",
             phone : "",
-            isRegistered : 0,
-            name : ""
+            isRegistered : 0
         }
     },
     methods : {
         submitRegister : function (){
+
+            
             var registerObj = {
                 'email' : this.email ,
                 'password' : this.password,
-                'companyName' : this.companyName,
+                'name' : this.name,
                 'city' : this.city,
                 'latitude' : this.latitude,
                 'longitude' : this.longitude,
                 'phone' : this.phone,             
                 
             }
-            this.$http.get('http://localhost:8080/company/me', registerObj).then(
+            this.$http.post('http://localhost:8081/company', registerObj).then(
                 (response) => {
                     this.isRegistered = 2;
                     this.name = response.body.name;
                 },
                 (err) => {
+                    console.log(err);
                     this.isRegistered = 1;
                 }
             )
@@ -85,7 +87,7 @@ export default {
             
                 this.email = "";
                 this.password = "";
-                this.companyName = "";
+                this.name = "";
                 this.city = "";
                 this.latitude = "";
                 this.longitude = "";

@@ -42,12 +42,13 @@ export default {
                 'email' : this.email ,
                 'password' : this.password
             }
-            this.$http.post('http://localhost:8080/company/login', loginObj).then(
+            this.$http.post('http://localhost:8081/company/login', loginObj).then(
                 (response) => {
                     this.isLoggedIn = 2;
                     this.name = response.body.name;
                 },
                 (err) => {
+                    alert(err);
                     this.isLoggedIn = 1;
                 }
             )
