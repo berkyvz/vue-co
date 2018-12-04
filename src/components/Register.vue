@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import {mapState, mapGetters, mapActions} from 'vuex';
+import {baseURL} from '../config/config.js';
 export default {
     name : 'register',
     data(){
@@ -57,6 +59,14 @@ export default {
             isRegistered : 0
         }
     },
+    computed: {
+    ...mapState([
+      'base_url'
+    ]),
+    ...mapGetters([
+      'getBaseURL',
+    ]),
+  },
     methods : {
         submitRegister : function (){
 
@@ -71,7 +81,7 @@ export default {
                 'phone' : this.phone,             
                 
             }
-            this.$http.post('http://localhost:8081/company', registerObj).then(
+            this.$http.post(baseURL+'/company', registerObj).then(
                 (response) => {
                     this.isRegistered = 2;
                     this.name = response.body.name;
