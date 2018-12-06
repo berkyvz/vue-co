@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex';
+//import {mapState, mapGetters, mapActions} from 'vuex';
 import {baseURL} from '../config/config.js';
 export default {
     name : 'register',
@@ -59,14 +59,14 @@ export default {
             isRegistered : 0
         }
     },
-    computed: {
+/*    computed: {
     ...mapState([
       'base_url'
     ]),
     ...mapGetters([
       'getBaseURL',
     ]),
-  },
+  },*/
     methods : {
         submitRegister : function (){
 

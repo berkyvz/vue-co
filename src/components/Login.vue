@@ -25,6 +25,7 @@
 
 <script>
 
+import {baseURL} from '../config/config.js'
 
 export default {
     name : 'login',
@@ -42,10 +43,11 @@ export default {
                 'email' : this.email ,
                 'password' : this.password
             }
-            this.$http.post('http://localhost:8081/company/login', loginObj).then(
+            this.$http.post(baseURL + '/company/login', loginObj).then(
                 (response) => {
                     this.isLoggedIn = 2;
                     this.name = response.body.name;
+                    console.log(response);
                 },
                 (err) => {
                     alert(err);

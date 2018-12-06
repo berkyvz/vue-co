@@ -7,4 +7,11 @@ export default [
     {path : '/' , component : About},
     {path : '/register' , component : Register},
     {path : '/login' , component : Login},
+    // {path: '/dashboard', component: Dashboard, children: [
+    //     {path: '', redirect: 'MyOpportunities'},
+    //     { path: 'myopportunities', component: MyOpportunities },
+    //     { path: 'createopportunuties', component: CreateOpportunities },
+    //     { path: 'qrcodes', component: MyQRCodes },
+    // ]},
+
 ]
