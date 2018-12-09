@@ -32,7 +32,7 @@
 import {baseURL} from '../config/config.js'
 
 export default {
-    name : 'login',
+    name : 'Login',
     data(){
         return {
            email : "",
@@ -47,11 +47,12 @@ export default {
                 'email' : this.email ,
                 'password' : this.password
             }
-            this.$http.post(baseURL + '/company/login', loginObj).then(
-                (response) => {
+            this.$http.post(baseURL + '/company/login', loginObj)
+            .then((response) => {
                     this.isLoggedIn = 2;
                     this.name = response.body.name;
-                    console.log(response);
+                    this.$router.push('/dashboard')
+                    console.log(response)
                 },
                 (err) => {
                     alert(err);

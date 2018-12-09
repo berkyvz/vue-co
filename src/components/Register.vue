@@ -11,6 +11,7 @@
         
             <div class="container">
                 <div class="form">
+                    <h3 class="register_title">Register</h3>
                     <div class="form-group">
                         <label>Email address</label>
                         <input type="email" v-model="email" class="form-control" placeholder="Enter your email" required>                
@@ -44,6 +45,7 @@
                     </div>
                     <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
                         Welcome {{ name }}! You have successfully registered.
+                        {{submitClear()}};
                     </div>
                     <button id="btnLeft" type="submit" class="btn btn-primary" v-on:click="submitRegister" >Register</button>
                     
@@ -57,7 +59,7 @@
 //import {mapState, mapGetters, mapActions} from 'vuex';
 import {baseURL} from '../config/config.js';
 export default {
-    name : 'register',
+    name : 'Register',
     data(){
         return {
             email : "",
@@ -98,7 +100,7 @@ export default {
                     this.name = response.body.name;
                 },
                 (err) => {
-                    console.log(err);
+                    alert(err);
                     this.isRegistered = 1;
                 }
             )
@@ -133,7 +135,7 @@ export default {
 
     }
 
-     h1{
+    .register_title{
     text-align: center
     }
 

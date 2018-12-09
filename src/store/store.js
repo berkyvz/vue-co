@@ -1,13 +1,4 @@
-/*import Vue from 'vue';
-import Vuex from 'vuex';
-
-Vue.use(Vuex);
-
-const state = {
-    base_url: 'http://localhost:8082',
-    message: 'Hello',
-    username: 'berkaan',
-};
+/*
 const getters = {
     welcomeMessage(state) {
         return `${state.message} ${state.username}`  ;
@@ -15,26 +6,6 @@ const getters = {
     getBaseURL(state) {
         return `${state.base_url}`;
     }
-};
-const mutations = {
-    setUserName(state,name){
-        state.username = name;
-    }
-};
-const actions = {
-    updateUserName({ commit }, name) {
-        commit('setUserName', name);
-    }
-};
-
-const store = new Vuex.Store({
-    state,
-    getters,
-    mutations,
-    actions,
-});
-
-export default store;
 */
 
 import Vue from 'vue';
@@ -44,17 +15,17 @@ Vue.use(Vuex);
 
 const state = {
     coid: '', // bunu yazmaya gerek var mı şu an bilmiyorum. ileride kontrol et. kendime not
-    email : '',
-    password : '',
-    name : '',
-    city : '',
-    latitude : '',
-    longitude : '',
-    phone : '',
-    token : '', // bunu yazmaya gerek var mı şu an bilmiyorum. ileride kontrol et. kendime not
+    email: '',
+    password: '',
+    name: '',
+    city: '',
+    latitude: '',
+    longitude: '',
+    phone: '',
+    token: '', // bunu yazmaya gerek var mı şu an bilmiyorum. ileride kontrol et. kendime not
 };
 const getters = {
-    
+
 };
 const mutations = {
     setCompanyEmail(state, email) {
@@ -78,7 +49,7 @@ const mutations = {
     setCompanyPhone(state, phone) {
         state.phone = phone;
     },
-    
+
 };
 const actions = {
     updateCompanyEmail({ commit }, email) {
@@ -105,11 +76,88 @@ const actions = {
 
 };
 
+const state2 = {
+    oid: '', // bunu yazmaya gerek var mı şu an bilmiyorum. ileride kontrol et. kendime not  
+    latitude: '',
+    longitude: '',
+    count: '',
+    desc1: '',
+    desc2: '',
+    desc3: '',
+    price: '',
+    city: '',
+};
+const getters2 = {
+
+};
+
+const mutations2 = {
+    setOpportunityLatitude(state2, latitude) {
+        state2.latitude = latitude;
+    },
+    setOpportunityLongitude(state2, longitude) {
+        state2.longitude = longitude;
+    },
+    setOpportunityCount(state2, count) {
+        state2.count = count;
+    },
+    setOpportunityDesc1(state2, desc1) {
+        state2.desc1 = desc1;
+    },
+    setOpportunityDesc2(state2, desc2) {
+        state2.desc2 = desc2;
+    },
+    setOpportunityDesc3(state2, desc3) {
+        state2.desc3 = desc3;
+    },
+    setOpportunityPrice(state2, price) {
+        state2.price = price;
+    },
+    setOpportunityCity(state2, city) {
+        state2.city = city;
+    },
+
+};
+const actions2 = {
+    updateOpportunityLatitude({ commit }, latitude) {
+        commit('setCompanyLatitude', latitude);
+    },
+    updateOpportunityLongitude({ commit }, longitude) {
+        commit('setOpportunityLongitude', longitude);
+    },
+    updateOpportunityDesc1({ commit }, desc1) {
+        commit('setOpportunityDesc1', desc1);
+    },
+    updateOpportunityDesc2({ commit }, desc2) {
+        commit('setOpportunityDesc2', desc2);
+    },
+    updateOpportunityDesc3({ commit }, desc3) {
+        commit('setOpportunityDesc3', desc3);
+    },
+    updateOpportunityPrice({ commit }, price) {
+        commit('setOpportunityPrice', price);
+    },
+    updateOpportunityCity({ commit }, city) {
+        commit('setOpportunityCity', city);
+    },
+};
+
+
 const store = new Vuex.Store({
-    state,
-    getters,
-    mutations,
-    actions,
+    modules: {
+        company: {
+            state,
+            getters,
+            mutations,
+            actions,
+        },
+        opportunity: {
+            state2,
+            getters2,
+            mutations2,
+            actions2,
+        }
+    }
 });
 
 export default store;

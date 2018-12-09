@@ -1,7 +1,5 @@
 <template>
 <div>
-
-
     <!--  HEADER -->
     <div>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -12,10 +10,22 @@
             <div class="navbar-collapse collapse justify-content-stretch" id="navbar7">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <div class="menuitem"><i class="fas fa-user"></i><div class="menuitem2">PROFILE</div> </div>
+                        <router-link
+                        to="/profile">
+                        <div class="menuitem">
+                            <i class="fas fa-user"></i>
+                            <div class="menuitem2">Profile</div>
+                        </div>
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                       <div class="menuitem"> <i class="fas fa-sign-out-alt"></i> <div class="menuitem2">LOG OUT</div> </div>
+                        <router-link
+                        to="/">
+                        <div class="menuitem"> 
+                            <i class="fas fa-sign-out-alt"></i> 
+                            <div class="menuitem2">Log Out</div> 
+                        </div>
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -25,19 +35,31 @@
     <div class="sidebar">
         <ul class="ulul">
             <li class="listitem">
-               <div class="listitemside"><i class="fas fa-plus-circle"></i> <span class="spanside">Create Opportunity</span> </div>
+                <router-link   
+                    to="/dashboard/createopportunuties"
+                    class="listitemside">
+                    <i class="fas fa-plus-circle"></i> <span class="spanside">Create Opportunity</span>
+                </router-link>
             </li>
              <li class="listitem">
-                 <div class="listitemside"><i class="fas fa-archive"></i> <span class="spanside">My Opportunities</span> </div>
+                   <router-link   
+                    to="/dashboard/myopportunities"
+                    class="listitemside">
+                    <i class="fas fa-archive"></i> <span class="spanside">My Opportunities</span>
+                </router-link>
             </li>
              <li class="listitem">
-                 <div class="listitemside"><i class="fas fa-qrcode"></i> <span class="spanside">My Qr Codes</span></div>
+                 <router-link   
+                    to="/dashboard/qrcodes"
+                    class="listitemside">
+                    <i class="fas fa-qrcode"></i> <span class="spanside">My QR Codes</span>
+                </router-link>
             </li>
         </ul>
            
     </div>
     <div class="content">
-        CONTENTS HERE
+        <router-view />
     </div>
     
    
@@ -47,10 +69,9 @@
 
 
 <script>
-import {baseURL} from '../../config/config.js'
 
 export default {
-    name : 'dashboard',
+    name : 'Dashboard',
     data(){
         return {
 

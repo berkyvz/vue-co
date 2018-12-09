@@ -1,12 +1,12 @@
 <template>
-    <h1>MyQRCodes</h1>
+<h1>My Profile</h1>
 </template>
 
 
 <script>
 
 export default {
-    name : 'MyQRCodes',
+    name : 'Profile',
     data(){
         return {
 
