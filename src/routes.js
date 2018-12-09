@@ -4,6 +4,7 @@ import Register from './components/Register.vue';
 import Dashboard from './components/Dashboard/Dashboard.vue'
 
 
+
 export default [
     {path : '/' , component : About},
     {path : '/register' , component : Register},
