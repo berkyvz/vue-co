@@ -11,7 +11,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <router-link
-                        to="/profile">
+                        to="/dashboard/profile">
                         <div class="menuitem">
                             <i class="fas fa-user"></i>
                             <div class="menuitem2">Profile</div>

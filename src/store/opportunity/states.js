@@ -16,4 +16,4 @@ const state2 = {
     city: '',
 };
 
-export default store;
+export default states;

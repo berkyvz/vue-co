@@ -52,10 +52,9 @@ export default {
                     this.isLoggedIn = 2;
                     this.name = response.body.name;
                     this.$router.push('/dashboard')
-                    console.log(response)
                 },
                 (err) => {
-                    alert(err);
+                    
                     this.isLoggedIn = 1;
                 }
             )
