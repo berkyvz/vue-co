@@ -1,18 +1,17 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Actions from './actions';
+import Getters from './getters';
+import Mutations from './mutations';
 
-Vue.use(Vuex);
-
-const state = {
-    coid: '', // bunu yazmaya gerek var mı şu an bilmiyorum. ileride kontrol et. kendime not
-    email: '',
-    password: '',
-    name: '',
-    city: '',
-    latitude: '',
-    longitude: '',
-    phone: '',
-    token: '', // bunu yazmaya gerek var mı şu an bilmiyorum. ileride kontrol et. kendime not
+const State = {
+   company: null
 };
 
-export default store;
+const CompanyModule = {
+    namespaced: true,
+    state: State,
+    getters: Getters,
+    actions: Actions,
+    mutations: Mutations
+};
+
+export default CompanyModule;

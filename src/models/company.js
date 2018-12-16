@@ -1,6 +1,5 @@
-export class Company {
-
-    Company(email, password, name, city, latitude, longitude, phone, token) {
+export default class Company {
+    constructor(email, password, name, city, latitude, longitude, phone) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -8,6 +7,5 @@ export class Company {
         this.latitude = latitude;
         this.longitude = longitude;
         this.phone = phone;
-        this.token = token;
     }
 }

@@ -1,22 +1,19 @@
+/* Vendor Libs Begin */
 import Vue from 'vue';
-import App from './App.vue';
-import VueResource from 'vue-resource';
-import VueRouter from 'vue-router';
-import Routes from './routes';
+/* Vendor Libs End */
+
+/*Custom Configuration Begin */
+import router from './routes'
 import store from './store/store';
+/*Custom Configuration End */
 
-Vue.use(VueResource);
-Vue.use(VueRouter);
-Vue.config.productionTip = false
-
-const router = new VueRouter({
-  mode: 'history',
-  routes: Routes
-})
+/* Custom Component Begin */
+import App from './App.vue';
+/* Custom Component End */
 
 new Vue({
   el: '#app',
   render: h => h(App),
   router: router,
-  store
-})
+  store: store
+});

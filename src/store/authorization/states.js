@@ -3,10 +3,10 @@ import Getters from './getters';
 import Mutations from './mutations';
 
 const State = {
-    opportunity: null
+   token: null
 };
 
-const OpportunityModule = {
+const AuthorizationModule = {
     namespaced: true,
     state: State,
     getters: Getters,
@@ -14,4 +14,4 @@ const OpportunityModule = {
     mutations: Mutations
 };
 
-export default OpportunityModule;
+export default AuthorizationModule;

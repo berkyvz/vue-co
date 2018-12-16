@@ -61,14 +61,12 @@
     <div class="content">
         <router-view />
     </div>
-    
-   
-
 </div>
 </template>
 
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
     name : 'Dashboard',
@@ -76,8 +74,17 @@ export default {
         return {
 
         }
+    },
+    computed: {
+        ...mapGetters({
+            userToken: 'authorization/getToken'
+        })
+    },
+    beforeRouteEnter: function (to, from, next) {
+        next(vm => {
+            if(vm.userToken === null) { vm.$router.push('/login') }
+        })
     }
-    
 }
 
 
