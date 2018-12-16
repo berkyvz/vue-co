@@ -40,7 +40,8 @@
                         class="form-check-input"
                         type="checkbox"
                         v-model="companyLocation"
-                        @change="autoComplete">
+                        @change="autoComplete"
+                        >
                     <label 
                         class="form-check-label" 
                         for="companyLocation"
@@ -50,40 +51,108 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Amount</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter the amount of the opportunity" required>
+                <label 
+                    for="amount"
+                    >
+                    Amount
+                </label>
+                <input 
+                    id="amount"
+                    class="form-control"
+                    type="number" 
+                    placeholder="Enter the amount of the opportunity" 
+                    required="required"
+                    v-model="amount"
+                    >
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Description One</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter a description of the opportunity" required>
+                <label 
+                    for="desc1"
+                    >
+                    Description One
+                </label>
+                <input  
+                    id="desc1"
+                    class="form-control"
+                    type="text" 
+                    placeholder="Enter a description of the opportunity" 
+                    required="required"
+                    v-model="desc1"
+                    >
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Description Two</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter a description of the opportunity" required>
+                <label 
+                    for="desc2"
+                    >
+                    Description Two
+                </label>
+                <input   
+                    id="desc2"
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter a description of the opportunity" 
+                    required="required"
+                    v-model="desc2"
+                    >
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Description Three</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter a description of the opportunity" required>
+                <label 
+                    for="desc3"
+                    >
+                    Description Three
+                </label>
+                <input   
+                    id="desc3"
+                    class="form-control"
+                    type="text" 
+                    placeholder="Enter a description of the opportunity" 
+                    required="required"
+                    v-model="desc3"
+                >
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Price</label>
-                <input type="phone" class="form-control" id="exampleInputPassword1" placeholder="Enter the price of the opportunity" required>
+                <label 
+                    for="price"
+                    >
+                    Price
+                </label>
+                <input 
+                    id="price"
+                    class="form-control"
+                    type="number" 
+                    placeholder="Enter the price of the opportunity" 
+                    required="required"
+                    v-model="price"
+                    >
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">City</label>
-                <input type="phone" class="form-control" id="exampleInputPassword1" placeholder="Enter the city of the opportunity" required>
+                <label 
+                    for="city"
+                    >
+                    City
+                </label>
+                <input
+                    id="city"
+                    class="form-control" 
+                    type="phone" 
+                    placeholder="Enter the city of the opportunity"
+                    required="required"
+                    v-model="city"
+                    >
             </div>
             <button 
                 id="btnLeft" 
                 class="btn btn-primary"
                 type="submit"
+                @click="createOpportunity"
                 >
                 Create Opportunity
             </button>
             <button 
                 id="btnRight" 
                 class="btn btn-primary"
-                type="submit"                
+                type="button"
+                @click="reset"                
                 >
                 Reset
             </button>
@@ -100,6 +169,12 @@ export default {
         return {
             latitude: '',
             longitude: '',
+            amount: '',
+            desc1: '',
+            desc2: '',
+            desc3: '',
+            price: '',
+            city: '',
             companyLocation: false
         }
     },
@@ -109,16 +184,31 @@ export default {
         })
     },
     methods: {
-       autoComplete: function () {
-           if (this.companyLocation) {
-               this.latitude = this.getCompany.latitude
-               this.longitude = this.getCompany.longitude
-           }
-           else {
-               this.latitude = ''
-               this.longitude = ''
-           }
-       } 
+        autoComplete: function () {
+            if (this.companyLocation) {
+                this.latitude = this.getCompany.latitude
+                this.longitude = this.getCompany.longitude
+            }
+            else {
+                this.latitude = ''
+                this.longitude = ''
+            }
+        },
+        createOpportunity: function () {
+
+        },
+        reset: function () {
+            this.latitude = ""
+            this.longitude = ""
+            this.companyLocation = false
+            this.amount = ""
+            this.desc1 = ""
+            this.desc2 = ""
+            this.desc3 = ""
+            this.price = ""
+            this.city = ""
+
+        }
     }
 }
 </script>
