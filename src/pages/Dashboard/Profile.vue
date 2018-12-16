@@ -31,12 +31,6 @@
                         <label>Phone</label>
                         <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number" required>                
                     </div>
-                    <div v-if="isRegistered == 1" class="alert alert-danger" role="alert">
-                        Something you have written is incorrect.
-                    </div>
-                    <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
-                        Welcome {{ name }}! You have successfully registered.
-                    </div>
                     <button type="submit" class="btn btn-primary" v-on:click="submitUpdate" >Save</button>    
                 </div>
             </div>
@@ -45,11 +39,9 @@
 
 
 <script>
-//import Company from '../../models/company'
-
-//import CompanyService from '@/services/company'
-
-
+import Company from '../../models/company'
+import CompanyService from '@/services/company'
+import {mapGetters} from 'vuex'
 
 export default {
     name : 'Profile',
@@ -64,11 +56,19 @@ export default {
             phone : ''
         }
     } ,
-    /*
+    created(){
+        this.email = this.company.email;
+        this.password = this.company.password;
+        this.name = this.company.name;
+        this.city = this.company.city;
+        this.latitude = this.company.latitude;
+        this.longitude = this.company.longitude;
+        this.phone = this.company.phone;
+
+    },
     computed: {
         ...mapGetters({
             company: 'company/getCompany',
-            token : 'authorization/getToken'
         })
     },
     methods : {
@@ -79,13 +79,15 @@ export default {
                 console.log(res);
             })
 
-            CompanyService.login(this.email, this.password)
+           
+
+           /* CompanyService.login(this.email, this.password)
                 .then(res => res.data)
                 .then(res => {
                     this.$store.dispatch('authorization/setToken', res.token);
-            })
+            })*/
         }
-    }*/
+    }
     
 }
 
