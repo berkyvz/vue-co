@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Create an Opportunity</h1>
-        <table cols="" data="" />
+        <!--<table cols="" data="" />-->
         <form style="margin-bottom:100px">               
             <div class="form-group">
                 <label for="exampleInputPassword1">Latitude :</label>

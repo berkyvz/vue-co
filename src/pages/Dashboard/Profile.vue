@@ -1,11 +1,11 @@
-<template>
+<template>   
 <!--import func from './vue-temp/vue-editor-bridge';-->
 <div class="container">
                 <div class="form">
                     <h3 class="register_title">You can update your profile here!</h3>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" v-model="email" class="form-control" placeholder="Enter your email" required>                
+                        <input type="email" v-model="email" class="form-control" placeholder="burası kaydolurkenki emaili editlenemez olacak" required>                
                     </div>
                     <div class="form-group">
                         <label>Password</label>
@@ -36,14 +36,12 @@
                     </div>
                     <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
                         Welcome {{ name }}! You have successfully registered.
-                        {{submitClear()}};
                     </div>
-                    <button id="btnLeft" type="submit" class="btn btn-primary" v-on:click="submitUpdate" >Update</button>
-                    
-                    <button id="btnRight" type="reset" class="btn btn-primary" v-on:click="submitClear" >Clear</button>
+                    <button type="submit" class="btn btn-primary" v-on:click="submitUpdate" >Save</button>    
                 </div>
             </div>
 </template>
+
 
 
 <script>
@@ -98,11 +96,6 @@ export default {
 
 
 <style scoped>
-    #btnLeft {
-        margin-right: 10px;
-
-    }
-
     .form{
         background-color: rgba(0, 0, 0, 0.1);
         padding: 20px;
