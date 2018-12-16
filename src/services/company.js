@@ -10,6 +10,14 @@ export default class CompanyService {
             {'email': email, 'password': password }
         )
     }
+
+    static register = (company) => {
+        return NoAuthorization.post(
+            'company',
+            company
+        )
+    }
+
     static updateProfile = (password, name, city, latitude, longitude, phone) => {
         return Authorization.put(
             'company',

@@ -1,63 +1,62 @@
 <template>
     <div>
         <nav class="navbar navbar-light bg-dark">
-                <span class="navbar-brand brandd">Catch Opportunity</span>
-                <ul>
-                    <router-link to="/" class="links">About Us</router-link>
-                    <router-link to="/login" class="links">Login</router-link>
-                    <router-link to="/register" class="links">Register</router-link>
-                </ul>
+            <span class="navbar-brand brandd">Catch Opportunity</span>
+            <ul>
+                <router-link to="/" class="links">About Us</router-link>
+                <router-link to="/login" class="links">Login</router-link>
+                <router-link to="/register" class="links">Register</router-link>
+            </ul>
         </nav>
         
-            <div class="container">
-                <div class="form">
-                    <h3 class="register_title">Register</h3>
-                    <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" v-model="email" class="form-control" placeholder="Enter your email" required>                
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" v-model="password" class="form-control" placeholder="Enter your password" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Company name</label>
-                        <input type="text" v-model="name" class="form-control" placeholder="Enter your company name" required>                
-                    </div>
-                    <div class="form-group">
-                        <label>City</label>
-                        <input type="text" v-model="city" class="form-control" placeholder="Enter the city of your company " required>                
-                    </div>
-                    <div class="form-group">
-                        <label>Latitude</label>
-                        <input type="text" v-model="latitude" class="form-control" placeholder="Enter the latitude of your company " required>                
-                    </div>
-                    <div class="form-group">
-                        <label>Longitude</label>
-                        <input type="text" v-model="longitude" class="form-control" placeholder="Enter the longitude of your company " required>                
-                    </div>
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number" required>                
-                    </div>
-                    <div v-if="isRegistered == 1" class="alert alert-danger" role="alert">
-                        Something you have written is incorrect.
-                    </div>
-                    <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
-                        Welcome {{ name }}! You have successfully registered.
-                        {{submitClear()}};
-                    </div>
-                    <button id="btnLeft" type="submit" class="btn btn-primary" v-on:click="submitRegister" >Register</button>
-                    
-                    <button id="btnRight" type="reset" class="btn btn-primary" v-on:click="submitClear" >Clear</button>
+        <div class="container">
+            <div class="form">
+                <h3 class="register_title">Register</h3>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" v-model="email" class="form-control" placeholder="Enter your email" required>                
                 </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" v-model="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label>Company name</label>
+                    <input type="text" v-model="name" class="form-control" placeholder="Enter your company name" required>                
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" v-model="city" class="form-control" placeholder="Enter the city of your company " required>                
+                </div>
+                <div class="form-group">
+                    <label>Latitude</label>
+                    <input type="text" v-model="latitude" class="form-control" placeholder="Enter the latitude of your company " required>                
+                </div>
+                <div class="form-group">
+                    <label>Longitude</label>
+                    <input type="text" v-model="longitude" class="form-control" placeholder="Enter the longitude of your company " required>                
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number" required>                
+                </div>
+                <div v-if="isRegistered == 1" class="alert alert-danger" role="alert">
+                    Something you have written is incorrect.
+                </div>
+                <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
+                    Welcome {{ name }}! You have successfully registered.
+                    {{submitClear()}};
+                </div>
+                <button id="btnLeft" type="button" class="btn btn-primary" @click="submitRegister" >Register</button>
+                <button id="btnRight" type="button" class="btn btn-primary" @click="submitClear" >Clear</button>
             </div>
+        </div>
     </div>
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex';
-import {baseURL} from '../config/config.js';
+import CompanyService from '@/services/company'
+
 export default {
     name : 'Register',
     data(){
@@ -72,18 +71,8 @@ export default {
             isRegistered : 0
         }
     },
-/*    computed: {
-    ...mapState([
-      'base_url'
-    ]),
-    ...mapGetters([
-      'getBaseURL',
-    ]),
-  },*/
     methods : {
         submitRegister : function (){
-
-            
             var registerObj = {
                 'email' : this.email ,
                 'password' : this.password,
@@ -91,19 +80,20 @@ export default {
                 'city' : this.city,
                 'latitude' : this.latitude,
                 'longitude' : this.longitude,
-                'phone' : this.phone,             
-                
-            }
+                'phone' : this.phone,                 
+        }
 
-            this.$http.post(baseURL+'/company', registerObj).then(
-                (response) => {
-                    this.isRegistered = 2;
-                    this.name = response.body.name;
-                },
-                (err) => {
-                    this.isRegistered = 1;
-                }
-            )
+            CompanyService.register(registerObj)
+            .then(res => res.data)
+            .then(response => {
+                this.isRegistered = 2;
+                const name = response.name;
+                console.log(name)
+            })
+            .catch(err => {
+                console.log(err)
+                this.isRegistered = 1;
+            })
             
         },
         submitClear : function (){
