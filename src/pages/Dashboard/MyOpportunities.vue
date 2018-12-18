@@ -5,21 +5,8 @@
             <li class="list-group-item">
             Oid - desc1 - desc2 - desc3 - count - price <button>Remove</button>
             </li>
-            <li class="list-group-item">
-            Oid - desc1 - desc2 - desc3 - count - price <button>Remove</button>
-            </li>
-            <li class="list-group-item">
-            Oid - desc1 - desc2 - desc3 - count - price <button>Remove</button>
-            </li>
-            <li class="list-group-item">
-            Oid - desc1 - desc2 - desc3 - count - price <button>Remove</button>
-            </li>
-            <li class="list-group-item">
-            Oid - desc1 - desc2 - desc3 - count - price <button>Remove</button>
-            </li>
         </ul>
     </div>
-
 </template>
 
 
