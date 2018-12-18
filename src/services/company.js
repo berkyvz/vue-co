@@ -18,9 +18,9 @@ export default class CompanyService {
         )
     }
 
-    static updateProfile = (password, name, city, latitude, longitude, phone) => { //returns new token and other company infos.
+    static updateProfile = (companyId ,password, name, city, latitude, longitude, phone) => { //returns new token and other company infos.
         return Authorization.put(
-            'company',
+            'company/' + companyId,
             {'password' : password , 'name' : name , 'city' : city , 'latitude' : latitude , 'longitude' : longitude , 'phone' : phone}
         )
     }

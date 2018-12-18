@@ -51,7 +51,7 @@ export default {
                     this.isLoggedIn = 1
                     this.$store.dispatch('authorization/setToken', res.token);
                     Authorization.defaults.headers['AuthSession'] = res.token; // Burada tokeni basmak zorunda kaldım yoksa almıyor...
-                    const company = new Company(res.email, res.password, res.name, res.city, res.latitude, res.longitude, res.phone)
+                    const company = new Company(res.coid , res.email, res.password, res.name, res.city, res.latitude, res.longitude, res.phone)
                     this.$store.dispatch('company/setCompany', company);
                     this.$router.push('/dashboard')
                 })

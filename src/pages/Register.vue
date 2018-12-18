@@ -30,22 +30,25 @@
                 </div>
                 <div class="form-group">
                     <label>Latitude</label>
-                    <input type="text" v-model="latitude" class="form-control" placeholder="Enter the latitude of your company " required>                
+                    <input type="number" v-model="latitude" class="form-control" placeholder="Enter the latitude of your company " required>                
                 </div>
                 <div class="form-group">
                     <label>Longitude</label>
-                    <input type="text" v-model="longitude" class="form-control" placeholder="Enter the longitude of your company " required>                
+                    <input type="number" v-model="longitude" class="form-control" placeholder="Enter the longitude of your company " required>                
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-secondary" @click="findLocation">Find My Location</button>               
                 </div>
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number" required>                
+                    <input type="number" v-model="phone" class="form-control" placeholder="Enter your phone number" required>                
                 </div>
                 <div v-if="isRegistered == 1" class="alert alert-danger" role="alert">
-                    Something you have written is incorrect.
+                    {{errorMessage}}
                 </div>
                 <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
-                    Welcome {{ name }}! You have successfully registered.
-                    {{submitClear()}};
+                    Welcome. You have successfully registered.
+                    {{submitClear()}}
                 </div>
                 <button id="btnLeft" type="button" class="btn btn-primary" @click="submitRegister" >Register</button>
                 <button id="btnRight" type="button" class="btn btn-primary" @click="submitClear" >Clear</button>
@@ -56,6 +59,7 @@
 
 <script>
 import CompanyService from '@/services/company'
+
 
 export default {
     name : 'Register',
@@ -68,7 +72,8 @@ export default {
             latitude : "",
             longitude : "",
             phone : "",
-            isRegistered : 0
+            isRegistered : 0,
+            errorMessage : "ss"
         }
     },
     methods : {
@@ -83,12 +88,45 @@ export default {
                 'phone' : this.phone,                 
         }
 
+        if(!this.email.includes('@')){
+            this.isRegistered = 1;
+            this.errorMessage = "Email must contains '@' ";
+            return;
+        }
+        if(this.password.length < 5){
+            this.isRegistered = 1;
+            this.errorMessage = "Password is must be more than 5 character";
+            return;
+        }
+         if(this.name.length < 1){
+            this.isRegistered = 1;
+            this.errorMessage = "Check the Company Name";
+            return;
+        }
+        if(this.city.length < 1){
+            this.isRegistered = 1;
+            this.errorMessage = "Please enter the City. ";
+            return;
+        }
+
+        if(this.latitude.length < 1){
+            this.isRegistered = 1;
+            this.errorMessage = "Check the latitude";
+            return;
+        }
+
+        if(this.longitude.length < 1){
+            this.isRegistered = 1;
+            this.errorMessage = "Check the longitude";
+            return;
+        }
+
+
             CompanyService.register(registerObj)
             .then(res => res.data)
             .then(response => {
                 this.isRegistered = 2;
-                const name = response.name;
-                console.log(name)
+                console.log(response);
             })
             .catch(err => {
                 console.log(err)
@@ -106,7 +144,14 @@ export default {
                 this.longitude = "";
                 this.phone = "";
 
-            }
+            },
+        findLocation : function(){
+            this.$getLocation()
+            .then(coordinates => {
+            this.latitude = coordinates.lat
+            this.longitude = coordinates.lng
+            });
+        }
         } 
     }  
 

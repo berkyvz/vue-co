@@ -1,5 +1,6 @@
 export default class Company {
-    constructor(email, password, name, city, latitude, longitude, phone) {
+    constructor(coid ,email, password, name, city, latitude, longitude, phone) {
+        this.coid = coid;
         this.email = email;
         this.password = password;
         this.name = name;

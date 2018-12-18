@@ -5,7 +5,7 @@
                     <h3 class="register_title">You can update your profile here!</h3>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" v-model="email" class="form-control" placeholder="burası kaydolurkenki emaili editlenemez olacak" required>                
+                        <input type="email" v-model="email" class="form-control" disabled="disabled" placeholder="burası kaydolurkenki emaili editlenemez olacak" required>                
                     </div>
                     <div class="form-group">
                         <label>Password</label>
@@ -42,11 +42,13 @@
 import Company from '../../models/company'
 import CompanyService from '@/services/company'
 import {mapGetters} from 'vuex'
+import { Authorization } from '@/services/config'
 
 export default {
     name : 'Profile',
     data(){
         return {
+            coid : 0,
             email : '',
             password : '',
             name : '',
@@ -57,6 +59,7 @@ export default {
         }
     } ,
     created(){
+        this.coid = this.company.coid;
         this.email = this.company.email;
         this.password = this.company.password;
         this.name = this.company.name;
@@ -73,10 +76,15 @@ export default {
     },
     methods : {
          submitUpdate : function() {
-            CompanyService.updateProfile(this.password , this.name , this.latitude , this.longitude , this.phone)
+
+            CompanyService.updateProfile(this.coid , this.password , this.name , this.city ,this.latitude , this.longitude , this.phone)
             .then(res => res.data)
             .then(res => {
-                console.log(res);
+
+                 this.$store.dispatch('authorization/setToken', res.token);
+                 Authorization.defaults.headers['AuthSession'] = res.token; // Burada tokeni basmak zorunda kaldım yoksa almıyor...
+                 const company = new Company(res.coid , res.email, res.password, res.name, res.city, res.latitude, res.longitude, res.phone)
+                 this.$store.dispatch('company/setCompany', company);
             })
 
            

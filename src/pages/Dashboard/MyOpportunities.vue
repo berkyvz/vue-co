@@ -8,6 +8,7 @@
                 <th>Description 3</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>Left Amount</th>
                 <th>Price</th>
                 <th></th>
             </tr>
@@ -18,8 +19,9 @@
                 <td>{{opp.desc3}}</td>
                 <td>{{opp.latitude}}</td>
                 <td>{{opp.longitude}} </td>
+                <td>{{opp.count}} </td>
                 <td>{{opp.price}}</td>
-                <td><button class="btn btn-danger" @click="removeOpportunity(index)">REMOVE</button></td>
+                <td><button class="btn btn-danger" @click="removeOpportunity(index+1)">REMOVE</button></td>
             </tr>
     </div>
 </template>
