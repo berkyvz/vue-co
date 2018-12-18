@@ -17,7 +17,7 @@ export const NoAuthorization = axios.create({
 
 export const Authorization = axios.create({
     baseURL: Config.BaseUrl,
-    headers: { 'Content-Type': 'application/json' , 'Access-Control-Allow-Origin' : 'true' }
+    headers: { 'Content-Type': 'application/json' }
 });
 
 Authorization.defaults.headers.common['AuthSession'] = AUTH_TOKEN ? (AUTH_TOKEN) : ''; 

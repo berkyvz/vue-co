@@ -50,6 +50,12 @@ export default {
             OpportunityService.deleteOpportunity(index).then(res => {
                 console.log(res);
             })
+
+              OpportunityService.getMyOpportunities()
+            .then(res => res.data)
+            .then(res => {
+                this.opportunities = res;
+            });
         }
     }
     

@@ -5,7 +5,7 @@ export default class OpportunityService {
     static createOpportunity = (latitude, longitude , city , amount , desc1 , desc2  , desc3 , price) => {
         return Authorization.post(
             'opportunity',
-            {'latitude': latitude, 'longitude' : longitude , 'city' : city ,'count':amount , 'desc1':desc1 , 'desc2':desc2  , 'desc3':desc3 , 'price ':price}
+            {'latitude': latitude, 'longitude' : longitude , 'city' : city ,'count':amount , 'desc1':desc1 , 'desc2':desc2  , 'desc3':desc3 , 'price':price}
         )
     }
 
