@@ -1,6 +1,9 @@
 <template>
-<div class="container">
+<div>
     <div class="form">
+        <div v-if="loggingError" class="alert alert-danger" role="alert">
+            <strong>Oh no!</strong> Please check email, password and try submitting again.
+        </div>
         <h3 class="login_title">Login</h3>
         <div class="form-group">
             <label>Email address</label>
@@ -11,22 +14,13 @@
             <label>Password</label>
             <input type="password" class="form-control" v-model="password" placeholder="Password">
         </div>
-        <div v-if="isLoggedIn == 1" class="alert alert-danger" role="alert">
-            Email or Password is incorrect
-        </div>
-        <div v-if="isLoggedIn == 2" class="alert alert-success" role="alert">
-            Welcome {{name }} You are successfully Logged In.
-        </div>
-        <button type="submit" class="btn btn-primary" v-on:click="submitLogin" >Submit</button>
+        <button type="submit" class="btn btn-primary" style="width : 100%;" v-on:click="submitLogin" >Submit</button>
+        <div class="registeredyet"> <p>Not registered yet? <a href="/register" >Create Account</a></p> </div> </div>
+        
     </div>
-</div>
-
-
 </template>
 
 <script>
-//import {baseURL} from '../config/config.js'
-
 import Company from '../models/company'
 
 import CompanyService from '@/services/company'
@@ -39,7 +33,7 @@ export default {
         return {
            email : "",
            password  : "",
-           isLoggedIn: 0,
+           loggingError: false,
            name : ""
         }
     },
@@ -48,13 +42,14 @@ export default {
             CompanyService.login(this.email, this.password)
                 .then(res => res.data)
                 .then(res => {
-                    this.isLoggedIn = 1
                     this.$store.dispatch('authorization/setToken', res.token);
                     Authorization.defaults.headers['AuthSession'] = res.token; // Burada tokeni basmak zorunda kaldım yoksa almıyor...
                     const company = new Company(res.coid , res.email, res.password, res.name, res.city, res.latitude, res.longitude, res.phone)
                     this.$store.dispatch('company/setCompany', company);
                     this.$router.push('/dashboard')
-                })
+                }).catch(err => {
+                this.loggingError = true;
+            })
         } 
     }
 }
@@ -62,6 +57,7 @@ export default {
 <style scoped>
 
 .form{
+    height: 60%;
     background-color: rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-top: 200px;
@@ -72,6 +68,15 @@ export default {
 
 .login_title{
    text-align: center;
+}
+
+.registeredyet{
+    text-align: center;
+    font-size: 18px;
+}
+
+.registeredyet:hover{
+    font-size: 20px;
 }
   
 </style>

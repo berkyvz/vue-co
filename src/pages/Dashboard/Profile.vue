@@ -31,7 +31,11 @@
                         <label>Phone</label>
                         <input type="text" v-model="phone" class="form-control" placeholder="Enter your phone number" required>                
                     </div>
-                    <button type="submit" class="btn btn-primary" v-on:click="submitUpdate" >Save</button>    
+                    <button type="submit" class="btn btn-primary" v-on:click="submitUpdate" >Save</button>
+
+                    <div v-if="isSaved" class="alert alert-success" role="alert">
+                        <strong>Well done!</strong> You successfully save the changes.
+                    </div>    
                 </div>
             </div>
 </template>
@@ -55,7 +59,8 @@ export default {
             city : '',
             latitude : '',
             longitude : '',
-            phone : ''
+            phone : '',
+            isSaved : false
         }
     } ,
     created(){
@@ -77,6 +82,7 @@ export default {
     methods : {
          submitUpdate : function() {
 
+            
             CompanyService.updateProfile(this.coid , this.password , this.name , this.city ,this.latitude , this.longitude , this.phone)
             .then(res => res.data)
             .then(res => {
@@ -85,15 +91,9 @@ export default {
                  Authorization.defaults.headers['AuthSession'] = res.token; // Burada tokeni basmak zorunda kaldım yoksa almıyor...
                  const company = new Company(res.coid , res.email, res.password, res.name, res.city, res.latitude, res.longitude, res.phone)
                  this.$store.dispatch('company/setCompany', company);
+                 this.isSaved = true;
             })
 
-           
-
-           /* CompanyService.login(this.email, this.password)
-                .then(res => res.data)
-                .then(res => {
-                    this.$store.dispatch('authorization/setToken', res.token);
-            })*/
         }
     }
     
