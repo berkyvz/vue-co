@@ -1,6 +1,6 @@
 <template>
     <div class="all-form">
-        <h1>Opportunities</h1>
+        <h1>My Opportunities</h1>
             <tr>
                 <th>Opportunity ID</th>
                 <th>Description 1</th>
@@ -10,7 +10,7 @@
                 <th>Longitude</th>
                 <th>Left Amount</th>
                 <th>Price</th>
-                <th></th>
+                <th>Option</th>
             </tr>
             <tr v-for="(opp,index) in opportunities" :key="index">
                 <td> {{ opp.oid }}</td>
@@ -19,10 +19,16 @@
                 <td>{{opp.desc3}}</td>
                 <td>{{opp.latitude}}</td>
                 <td>{{opp.longitude}} </td>
-                <td>{{opp.count}} </td>
+                <td >{{opp.count}} </td>
                 <td>{{opp.price}}</td>
-                <td><button class="btn btn-danger" @click="removeOpportunity(index+1)">REMOVE</button></td>
+                <td v-if="opp.count!=0"><button class="btn btn-danger" @click="removeOpportunity(index+1)">REMOVE</button></td>
+                <td v-if="opp.count==0"><button class="btn btn-primary" @click="removeOpportunity(index+1)">REMOVE[Out of Stock]</button></td>
             </tr>
+            <div v-if="showing" class="alert alert-primary" role="alert">
+                    Opportunity Removed.
+            </div>
+            
+        
     </div>
 </template>
 
@@ -35,7 +41,8 @@ export default {
     name : 'MyOpportunities',
     data(){
         return {
-            opportunities : []
+            opportunities : [],
+            showing : false
 
         }
     } , created(){
@@ -46,12 +53,18 @@ export default {
             });
 
      
+    },updated(){
+        OpportunityService.getMyOpportunities()
+            .then(res => res.data)
+            .then(res => {
+                this.opportunities = res;
+            });
     },
     methods : {
         removeOpportunity : function(index) {
+            this.showing = true;
             OpportunityService.deleteOpportunity(index).then(res => {
-                console.log(res);
-            })
+            });
 
               OpportunityService.getMyOpportunities()
             .then(res => res.data)

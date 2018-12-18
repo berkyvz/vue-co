@@ -12,7 +12,7 @@
                 <input 
                     id="latitude"
                     class="form-control"
-                    type="text"
+                    type="number"
                     placeholder="Enter the latitude of the opportunity"
                     required="required"
                     v-model="latitude"
@@ -27,7 +27,7 @@
                 <input 
                     id="longitude"
                     class="form-control"
-                    type="text"
+                    type="number"
                     placeholder="Enter the longitude of the opportunity"
                     required="required"
                     v-model="longitude"
@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Amount</label>
-                <input v-model="count" type="text" class="form-control" placeholder="Enter the amount of the opportunity" required>
+                <input v-model="count" type="number" class="form-control" placeholder="Enter the amount of the opportunity" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Description One</label>
@@ -74,9 +74,15 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Price</label>
-                <input v-model="price" type="text" class="form-control" placeholder="Enter the price of the opportunity" required>
+                <input v-model="price" type="number" class="form-control" placeholder="Enter the price of the opportunity" required>
             </div>
-            <button 
+            <div v-if="showingError" class="alert alert-danger" role="alert">
+                {{errorMessage}}
+            </div>
+            <div v-if="showingOk" class="alert alert-success" role="alert">
+                Opportunity created. {{reset()}}
+            </div>
+            <button
                 @click="submitOpportunity"
                 id="btnLeft" 
                 class="btn btn-primary"
@@ -87,7 +93,8 @@
             <button 
                 id="btnRight" 
                 class="btn btn-primary"
-                type="button"                
+                type="button" 
+                @click="reset"               
                 >
                 Reset
             </button>
@@ -112,7 +119,11 @@ export default {
             price :'',
             desc1 :'',
             desc2 : '',
-            desc3 : '' 
+            desc3 : '' ,
+            showingError : false,
+            errorMessage : "",
+            showingOk : false
+
         }
     },
     computed: {
@@ -134,24 +145,40 @@ export default {
             }
         },
         submitOpportunity: function () {
+            /*latitude: '',
+            longitude: '',
+            city : '',
+            companyLocation: false,
+            count : '',
+            price :'',
+            desc1 :'',
+            desc2 : '',
+            desc3 : ''  */
+
+            if(this.latitude.length < 1 || this.city.length < 1 || this.count < 1 || this.desc1 < 1 || this.desc2 < 1 || this.desc3 < 1 ){
+                this.showingError = true;
+                this.errorMessage = "Please fill all the blanks."
+                return ;
+            }
             OpportunityService.createOpportunity(this.latitude, this.longitude , this.city , this.count , this.desc1 , this.desc2  , this.desc3 , this.price)
             .then(res => res.data)
             .then(res => {
-                console.log(res);
-            })
-            
+                this.showingOk = true;
+            });
 
         },
         reset: function () {
             this.latitude = ""
             this.longitude = ""
             this.companyLocation = false
-            this.amount = ""
+            this.count = ""
             this.desc1 = ""
             this.desc2 = ""
             this.desc3 = ""
             this.price = ""
             this.city = ""
+            this.showingError = false
+            this.errorMessage = ""
 
         }
     }
