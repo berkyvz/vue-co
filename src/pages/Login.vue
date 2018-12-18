@@ -31,6 +31,8 @@ import Company from '../models/company'
 
 import CompanyService from '@/services/company'
 
+import { Authorization } from '@/services/config'
+
 export default {
     name : 'Login',
     data(){
@@ -48,7 +50,7 @@ export default {
                 .then(res => {
                     this.isLoggedIn = 1
                     this.$store.dispatch('authorization/setToken', res.token);
-
+                    Authorization.defaults.headers['AuthSession'] = res.token; // Burada tokeni basmak zorunda kaldım yoksa almıyor...
                     const company = new Company(res.email, res.password, res.name, res.city, res.latitude, res.longitude, res.phone)
                     this.$store.dispatch('company/setCompany', company);
                     this.$router.push('/dashboard')

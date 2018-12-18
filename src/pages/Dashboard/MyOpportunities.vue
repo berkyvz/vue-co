@@ -1,11 +1,26 @@
 <template>
     <div class="all-form">
         <h1>Opportunities</h1>
-        <ul class="list-group">
-            <li class="list-group-item">
-            Oid - desc1 - desc2 - desc3 - count - price <button>Remove</button>
-            </li>
-        </ul>
+            <tr>
+                <th>Opportunity ID</th>
+                <th>Description 1</th>
+                <th>Description 2</th>
+                <th>Description 3</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            <tr v-for="(opp,index) in opportunities" :key="index">
+                <td> {{ opp.oid }}</td>
+                <td>{{opp.desc1}}</td>
+                <td>{{opp.desc2}}</td>
+                <td>{{opp.desc3}}</td>
+                <td>{{opp.latitude}}</td>
+                <td>{{opp.longitude}} </td>
+                <td>{{opp.price}}</td>
+                <td><button class="btn btn-danger" @click="removeOpportunity(index)">REMOVE</button></td>
+            </tr>
     </div>
 </template>
 
@@ -18,17 +33,24 @@ export default {
     name : 'MyOpportunities',
     data(){
         return {
+            opportunities : []
 
         }
     } , created(){
-   /*
            OpportunityService.getMyOpportunities()
             .then(res => res.data)
             .then(res => {
-                console.log(res);
+                this.opportunities = res;
             });
 
-     */  
+     
+    },
+    methods : {
+        removeOpportunity : function(index) {
+            OpportunityService.deleteOpportunity(index).then(res => {
+                console.log(res);
+            })
+        }
     }
     
 }
@@ -40,11 +62,21 @@ export default {
 
 
 <style scoped>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
- .all-form{
-        background: rgba(0, 0, 0 ,0.1);
-        padding: 30px;
-    }
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
 
 
 </style>

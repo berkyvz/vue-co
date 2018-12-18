@@ -57,7 +57,6 @@
                 </div>
             </div>
             <div class="form-group">
-<<<<<<< HEAD
                 <label for="exampleInputPassword1">Amount</label>
                 <input v-model="count" type="text" class="form-control" placeholder="Enter the amount of the opportunity" required>
             </div>
@@ -76,119 +75,19 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Price</label>
                 <input v-model="price" type="text" class="form-control" placeholder="Enter the price of the opportunity" required>
-=======
-                <label 
-                    for="amount"
-                    >
-                    Amount
-                </label>
-                <input 
-                    id="amount"
-                    class="form-control"
-                    type="number" 
-                    placeholder="Enter the amount of the opportunity" 
-                    required="required"
-                    v-model="amount"
-                    >
-            </div>
-            <div class="form-group">
-                <label 
-                    for="desc1"
-                    >
-                    Description One
-                </label>
-                <input  
-                    id="desc1"
-                    class="form-control"
-                    type="text" 
-                    placeholder="Enter a description of the opportunity" 
-                    required="required"
-                    v-model="desc1"
-                    >
-            </div>
-            <div class="form-group">
-                <label 
-                    for="desc2"
-                    >
-                    Description Two
-                </label>
-                <input   
-                    id="desc2"
-                    class="form-control"
-                    type="text"
-                    placeholder="Enter a description of the opportunity" 
-                    required="required"
-                    v-model="desc2"
-                    >
-            </div>
-            <div class="form-group">
-                <label 
-                    for="desc3"
-                    >
-                    Description Three
-                </label>
-                <input   
-                    id="desc3"
-                    class="form-control"
-                    type="text" 
-                    placeholder="Enter a description of the opportunity" 
-                    required="required"
-                    v-model="desc3"
-                >
-            </div>
-            <div class="form-group">
-                <label 
-                    for="price"
-                    >
-                    Price
-                </label>
-                <input 
-                    id="price"
-                    class="form-control"
-                    type="number" 
-                    placeholder="Enter the price of the opportunity" 
-                    required="required"
-                    v-model="price"
-                    >
-            </div>
-            <div class="form-group">
-                <label 
-                    for="city"
-                    >
-                    City
-                </label>
-                <input
-                    id="city"
-                    class="form-control" 
-                    type="phone" 
-                    placeholder="Enter the city of the opportunity"
-                    required="required"
-                    v-model="city"
-                    >
->>>>>>> e8ad7562245d7459010b371615813af981b20399
             </div>
             <button 
                 @click="submitOpportunity"
                 id="btnLeft" 
                 class="btn btn-primary"
-<<<<<<< HEAD
                 type="button"
-=======
-                type="submit"
-                @click="createOpportunity"
->>>>>>> e8ad7562245d7459010b371615813af981b20399
                 >
                 Create Opportunity
             </button>
             <button 
                 id="btnRight" 
                 class="btn btn-primary"
-<<<<<<< HEAD
                 type="button"                
-=======
-                type="button"
-                @click="reset"                
->>>>>>> e8ad7562245d7459010b371615813af981b20399
                 >
                 Reset
             </button>
@@ -207,7 +106,6 @@ export default {
         return {
             latitude: '',
             longitude: '',
-<<<<<<< HEAD
             city : '',
             companyLocation: false,
             count : '',
@@ -215,15 +113,6 @@ export default {
             desc1 :'',
             desc2 : '',
             desc3 : '' 
-=======
-            amount: '',
-            desc1: '',
-            desc2: '',
-            desc3: '',
-            price: '',
-            city: '',
-            companyLocation: false
->>>>>>> e8ad7562245d7459010b371615813af981b20399
         }
     },
     computed: {
@@ -232,40 +121,25 @@ export default {
         })
     },
     methods: {
-<<<<<<< HEAD
-       autoComplete: function () {
-           if (this.companyLocation) {
-               this.latitude = this.getCompany.latitude
-               this.longitude = this.getCompany.longitude
-               this.city = this.getCompany.city
-           }
-           else {
-               this.latitude = ''
-               this.longitude = ''
-               this.city = ''
-           }
-       } , 
-       submitOpportunity : function(){
-           console.log(store.getters['authorization/getToken']); // burada geliyor ama headera eklemiyor.
-           OpportunityService.createOpportunity(this.latitude , this.longitude , this.amount , this.desc1 , this.desc2 , this.desc3 , this.price ,this.city)
-            .then(res => res.data)
-            .then(res => {
-                console.log(res);
-            });
-
-       }
-=======
         autoComplete: function () {
             if (this.companyLocation) {
                 this.latitude = this.getCompany.latitude
                 this.longitude = this.getCompany.longitude
+                this.city = this.getCompany.city
             }
             else {
                 this.latitude = ''
                 this.longitude = ''
+                this.city = ''
             }
         },
-        createOpportunity: function () {
+        submitOpportunity: function () {
+            OpportunityService.createOpportunity(this.latitude, this.longitude , this.city , this.count , this.desc1 , this.desc2  , this.desc3 , this.price)
+            .then(res => res.data)
+            .then(res => {
+                console.log(res);
+            })
+            
 
         },
         reset: function () {
@@ -280,7 +154,6 @@ export default {
             this.city = ""
 
         }
->>>>>>> e8ad7562245d7459010b371615813af981b20399
     }
 }
 </script>

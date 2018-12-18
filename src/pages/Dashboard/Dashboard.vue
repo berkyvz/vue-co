@@ -134,9 +134,8 @@ i{
 }
 
 .content{
-    margin-right: 20px;
     margin-left: 20px;
-    width: 500px;
+    width: 70%;
     float: left;
 }
 
