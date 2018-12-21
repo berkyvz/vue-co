@@ -11,7 +11,7 @@
         </nav>
         <div class="container">
             <h1>About Us</h1>
-            <p>This platfor is a phone application and a website that will be progressed from two different sides for the same purpose.
+            <p>This platform is a phone application and a website that will be progressed from two different sides for the same purpose.
                The aim of this platform is for people to catch opportunities by showing them a limited activities, events and discounted products.
                Users can pre-order limited opportunities, which are special big discounts or they can pre-order the tickets of activities and events that
                 are embedded in our application’s database. This system protects the users from out-of-stock tickets, because these exclusive offers will

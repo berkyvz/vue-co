@@ -21,6 +21,10 @@
                     <input type="password" v-model="password" class="form-control" placeholder="Enter your password" required>
                 </div>
                 <div class="form-group">
+                    <label>Write Your Password Again</label>
+                    <input type="password" v-model="password2" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
                     <label>Company name</label>
                     <input type="text" v-model="name" class="form-control" placeholder="Enter your company name" required>                
                 </div>
@@ -48,7 +52,6 @@
                 </div>
                 <div v-if="isRegistered == 2" class="alert alert-success" role="alert">
                     Welcome. You have successfully registered.
-                    {{submitClear()}}
                 </div>
                 <button id="btnLeft" type="button" class="btn btn-primary" @click="submitRegister" >Register</button>
                 <button id="btnRight" type="button" class="btn btn-primary" @click="submitClear" >Clear</button>
@@ -73,7 +76,8 @@ export default {
             longitude : "",
             phone : "",
             isRegistered : 0,
-            errorMessage : "ss"
+            errorMessage : "",
+            password2 : ""
         }
     },
     methods : {
@@ -97,6 +101,13 @@ export default {
             this.isRegistered = 1;
             this.errorMessage = "Password is must be more than 5 character";
             return;
+        }
+
+        if(this.password !== this.password2){
+            this.isRegistered = 1;
+            this.errorMessage = "Passwords are not equal";
+            return;
+
         }
          if(this.name.length < 1){
             this.isRegistered = 1;
@@ -132,10 +143,17 @@ export default {
                 console.log(err)
                 this.isRegistered = 1;
             })
+
+            this.email = "";
+                this.password = "";
+                this.name = "";
+                this.city = "";
+                this.latitude = "";
+                this.longitude = "";
+                this.phone = "";
             
         },
         submitClear : function (){
-            
                 this.email = "";
                 this.password = "";
                 this.name = "";

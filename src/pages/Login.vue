@@ -1,5 +1,13 @@
 <template>
 <div>
+    <nav class="navbar navbar-light bg-dark">
+            <span class="navbar-brand brandd">Catch Opportunity</span>
+            <ul>
+                <router-link to="/" class="links">About Us</router-link>
+                <router-link to="/login" class="links">Login</router-link>
+                <router-link to="/register" class="links">Register</router-link>
+            </ul>
+    </nav>
     <div class="form">
         <div v-if="loggingError" class="alert alert-danger" role="alert">
             <strong>Oh no!</strong> Please check email, password and try submitting again.
@@ -15,7 +23,7 @@
             <input type="password" class="form-control" v-model="password" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary" style="width : 100%;" v-on:click="submitLogin" >Submit</button>
-        <div class="registeredyet"> <p>Not registered yet? <a href="/register" >Create Account</a></p> </div> </div>
+        <div class="registeredyet"> <p>Not registered yet? <router-link to="/register" >Create Account</router-link></p> </div> </div>
         
     </div>
 </template>
@@ -79,4 +87,22 @@ export default {
     font-size: 20px;
 }
   
+
+.brandd {
+   color: white;
+}
+.brandd:hover {
+   color: gray;
+ }
+ .links {
+   color : white;
+   font-weight: 600;
+   margin-right: 20px;
+ }
+ .links:hover {
+   color: gray;
+ }
+ ul {
+   display: inline; 
+ }
 </style>

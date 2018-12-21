@@ -80,7 +80,7 @@
                 {{errorMessage}}
             </div>
             <div v-if="showingOk" class="alert alert-success" role="alert">
-                Opportunity created. {{reset()}}
+                Opportunity created.
             </div>
             <button
                 @click="submitOpportunity"
@@ -154,8 +154,20 @@ export default {
             desc1 :'',
             desc2 : '',
             desc3 : ''  */
+            console.log(this.latitude.length);
+            console.log(this.longitude.length);
+            console.log(this.city.length);
+            console.log(this.count.length);
+            console.log(this.desc1.length);
+            console.log(this.desc2.length);
+            console.log(this.desc3.length);
+            console.log(this.price.length);
 
-            if(this.latitude.length < 1 || this.city.length < 1 || this.count < 1 || this.desc1 < 1 || this.desc2 < 1 || this.desc3 < 1 ){
+            if(this.latitude.length < 1 || this.longitude.length < 1 || 
+            this.city.length < 1 || this.count.length < 1 || 
+            this.desc1.length < 1 || this.desc2.length < 1 || 
+            this.desc3.length < 1 || this.price.length < 1 ){
+
                 this.showingError = true;
                 this.errorMessage = "Please fill all the blanks."
                 return ;
@@ -168,17 +180,18 @@ export default {
 
         },
         reset: function () {
-            this.latitude = ""
-            this.longitude = ""
-            this.companyLocation = false
-            this.count = ""
-            this.desc1 = ""
-            this.desc2 = ""
-            this.desc3 = ""
-            this.price = ""
-            this.city = ""
-            this.showingError = false
-            this.errorMessage = ""
+            this.latitude = "";
+            this.longitude = "";
+            this.companyLocation = false;
+            this.count = "";
+            this.desc1 = "";
+            this.desc2 = "";
+            this.desc3 = "";
+            this.price = "";
+            this.city = "";
+            this.showingError = false;
+            this.errorMessage = "";
+            this.showingOk = false;
 
         }
     }

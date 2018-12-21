@@ -3,7 +3,7 @@
     <!--  HEADER -->
     <div>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a href="/" class="navbar-brand">Dashboard</a>
+            <a href="/" class="navbar-brand">{{this.company.name}}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar7">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -77,7 +77,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            userToken: 'authorization/getToken'
+            userToken: 'authorization/getToken',
+            company : 'company/getCompany'
         })
     },
     beforeRouteEnter: function (to, from, next) {
@@ -111,13 +112,14 @@ export default {
     margin-top: 10px;
 }
 i{
-    font-size: 20px;
+    font-size: 28px;
     color: white;
     
 }
 .menuitem{
     width: 100px;
     margin-right: 10px;
+    text-decoration:none;
     color: white;
     font-size: 15px;
     border: 2px solid white;
@@ -138,6 +140,12 @@ i{
     width: 70%;
     float: left;
 }
+
+.router-link-active{
+    color: white;
+    font-weight: 800;
+}
+
 
 
 </style>
