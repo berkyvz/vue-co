@@ -145,23 +145,7 @@ export default {
             }
         },
         submitOpportunity: function () {
-            /*latitude: '',
-            longitude: '',
-            city : '',
-            companyLocation: false,
-            count : '',
-            price :'',
-            desc1 :'',
-            desc2 : '',
-            desc3 : ''  */
-            console.log(this.latitude.length);
-            console.log(this.longitude.length);
-            console.log(this.city.length);
-            console.log(this.count.length);
-            console.log(this.desc1.length);
-            console.log(this.desc2.length);
-            console.log(this.desc3.length);
-            console.log(this.price.length);
+          
 
             if(this.latitude.length < 1 || this.longitude.length < 1 || 
             this.city.length < 1 || this.count.length < 1 || 
@@ -169,14 +153,27 @@ export default {
             this.desc3.length < 1 || this.price.length < 1 ){
 
                 this.showingError = true;
+                this.showingOk = false;
                 this.errorMessage = "Please fill all the blanks."
                 return ;
             }
+
             OpportunityService.createOpportunity(this.latitude, this.longitude , this.city , this.count , this.desc1 , this.desc2  , this.desc3 , this.price)
             .then(res => res.data)
             .then(res => {
                 this.showingOk = true;
+                this.showingError = false;
             });
+
+            this.latitude = "";
+            this.longitude = "";
+            this.companyLocation = false;
+            this.count = "";
+            this.desc1 = "";
+            this.desc2 = "";
+            this.desc3 = "";
+            this.price = "";
+            this.city = "";
 
         },
         reset: function () {

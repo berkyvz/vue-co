@@ -151,6 +151,7 @@ export default {
                 this.latitude = "";
                 this.longitude = "";
                 this.phone = "";
+                this.password2 = "";
             
         },
         submitClear : function (){
@@ -161,8 +162,11 @@ export default {
                 this.latitude = "";
                 this.longitude = "";
                 this.phone = "";
+                this.password2 = "";
+                this.isRegistered = 0;
 
             },
+
         findLocation : function(){
             this.$getLocation()
             .then(coordinates => {

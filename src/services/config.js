@@ -21,4 +21,3 @@ export const Authorization = axios.create({
 });
 
 Authorization.defaults.headers.common['AuthSession'] = AUTH_TOKEN ? (AUTH_TOKEN) : ''; 
-//Request atınca eklemiyor headerı. Fakat sonradan burada birşeler değiştirip save edip istek atınca çalışıyor. Sebebini anlamadım. Bu yuzden loginde ekledim tokeni ve çalıştı.
