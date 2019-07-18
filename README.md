@@ -1,4 +1,4 @@
-# vuedeneme
+# vue-co
 
 ## Project setup
 ```
